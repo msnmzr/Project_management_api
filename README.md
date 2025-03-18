@@ -56,16 +56,17 @@ php artisan key:generate
 php artisan migrate --seed
 ```
 
-7. Install Laravel Passport:
+7. Set up Laravel Passport (required for authentication):
 ```bash
 php artisan passport:install
 ```
+This command generates encryption keys and OAuth clients necessary for the authentication system.
 
 ## Test Credentials
 
 ```
-Email: test@example.com
-Password: password
+Email: msnmzr1@gmail.com
+Password: 123456Aa
 ```
 
 ## API Documentation
@@ -92,8 +93,8 @@ Response: (201 Created)
         "first_name": "John",
         "last_name": "Doe",
         "email": "john@example.com",
-        "created_at": "2024-03-18T12:00:00.000000Z",
-        "updated_at": "2024-03-18T12:00:00.000000Z"
+        "created_at": "2025-03-18T12:00:00.000000Z",
+        "updated_at": "2025-03-18T12:00:00.000000Z"
     },
     "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1..."
 }
@@ -105,21 +106,21 @@ POST /api/login
 
 Request:
 {
-    "email": "john@example.com",
-    "password": "password"
+    "email": "msnmzr1@gmail.com",
+    "password": "123456Aa"
 }
 
 Response: (200 OK)
 {
     "user": {
-        "id": 1,
-        "first_name": "John",
-        "last_name": "Doe",
-        "email": "john@example.com",
-        "created_at": "2024-03-18T12:00:00.000000Z",
-        "updated_at": "2024-03-18T12:00:00.000000Z"
+        "id": 3,
+        "first_name": "Mohsin",
+        "last_name": "Mazhar",
+        "email": "msnmzr1@gmail.com",
+        "created_at": "2025-03-18T20:14:22.000000Z",
+        "updated_at": "2025-03-18T20:14:22.000000Z"
     },
-    "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1..."
+    "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9...."
 }
 ```
 
@@ -166,12 +167,42 @@ Response: (200 OK)
                     "value": "IT"
                 }
             ],
-            "created_at": "2024-03-18T12:00:00.000000Z",
-            "updated_at": "2024-03-18T12:00:00.000000Z"
+            "created_at": "2025-03-18T12:00:00.000000Z",
+            "updated_at": "2025-03-18T12:00:00.000000Z"
         }
     ],
-    "links": {...},
-    "meta": {...}
+    "links": {
+        "first": "http://127.0.0.1:7777/api/attributes?page=1",
+        "last": "http://127.0.0.1:7777/api/attributes?page=1",
+        "prev": null,
+        "next": null
+    },
+    "meta": {
+        "current_page": 1,
+        "from": 1,
+        "last_page": 1,
+        "links": [
+            {
+                "url": null,
+                "label": "&laquo; Previous",
+                "active": false
+            },
+            {
+                "url": "http://127.0.0.1:7777/api/attributes?page=1",
+                "label": "1",
+                "active": true
+            },
+            {
+                "url": null,
+                "label": "Next &raquo;",
+                "active": false
+            }
+        ],
+        "path": "http://127.0.0.1:7777/api/attributes",
+        "per_page": 15,
+        "to": 5,
+        "total": 5
+    }
 }
 ```
 
@@ -205,10 +236,19 @@ Response: (201 Created)
         "id": 2,
         "name": "New Project",
         "status": "active",
-        "users": [...],
-        "attributes": [...],
-        "created_at": "2024-03-18T12:00:00.000000Z",
-        "updated_at": "2024-03-18T12:00:00.000000Z"
+        "users": [
+            {
+                "id": 1,
+                "first_name": "Test",
+                "last_name": "User",
+                "email": "test@example.com",
+                "created_at": "2025-03-18T20:05:07.000000Z",
+                "updated_at": "2025-03-18T20:05:07.000000Z"
+            }
+        ],
+        "attributes": [],
+        "created_at": "2025-03-18T20:05:07.000000Z",
+        "updated_at": "2025-03-18T20:05:07.000000Z"
     }
 }
 ```
@@ -224,7 +264,7 @@ Authorization: Bearer {access_token}
 
 Query Parameters:
 ?filters[task_name]=Meeting
-?filters[date]=2024-03-18
+?filters[date]=2025-03-18
 ?filters[project_id]=1
 
 Response: (200 OK)
@@ -233,16 +273,59 @@ Response: (200 OK)
         {
             "id": 1,
             "task_name": "Meeting",
-            "date": "2024-03-18",
-            "hours": 2.5,
-            "user": {...},
-            "project": {...},
-            "created_at": "2024-03-18T12:00:00.000000Z",
-            "updated_at": "2024-03-18T12:00:00.000000Z"
+            "date": "2025-03-18T00:00:00.000000Z",
+            "hours": "2.50",
+            "user": {
+                "id": 3,
+                "first_name": "Mohsin",
+                "last_name": "Mazhar",
+                "email": "msnmzr1@gmail.com",
+                "created_at": "2025-03-18T20:14:22.000000Z",
+                "updated_at": "2025-03-18T20:14:22.000000Z"
+            },
+            "project": {
+                "id": 1,
+                "name": "Project A",
+                "status": "active",
+                "created_at": "2025-03-18T20:05:07.000000Z",
+                "updated_at": "2025-03-18T20:05:07.000000Z"
+            },
+            "created_at": "2025-03-18T20:59:18.000000Z",
+            "updated_at": "2025-03-18T20:59:18.000000Z"
         }
     ],
-    "links": {...},
-    "meta": {...}
+    "links": {
+        "first": "http://127.0.0.1:7777/api/timesheets?page=1",
+        "last": "http://127.0.0.1:7777/api/timesheets?page=1",
+        "prev": null,
+        "next": null
+    },
+    "meta": {
+        "current_page": 1,
+        "from": 1,
+        "last_page": 1,
+        "links": [
+            {
+                "url": null,
+                "label": "&laquo; Previous",
+                "active": false
+            },
+            {
+                "url": "http://127.0.0.1:7777/api/timesheets?page=1",
+                "label": "1",
+                "active": true
+            },
+            {
+                "url": null,
+                "label": "Next &raquo;",
+                "active": false
+            }
+        ],
+        "path": "http://127.0.0.1:7777/api/timesheets",
+        "per_page": 15,
+        "to": 1,
+        "total": 1
+    }
 }
 ```
 
@@ -256,7 +339,7 @@ Authorization: Bearer {access_token}
 Request:
 {
     "task_name": "Meeting",
-    "date": "2024-03-18",
+    "date": "2025-03-18",
     "hours": 2.5,
     "project_id": 1
 }
@@ -266,12 +349,25 @@ Response: (201 Created)
     "data": {
         "id": 1,
         "task_name": "Meeting",
-        "date": "2024-03-18",
+        "date": "2025-03-18",
         "hours": 2.5,
-        "user": {...},
-        "project": {...},
-        "created_at": "2024-03-18T12:00:00.000000Z",
-        "updated_at": "2024-03-18T12:00:00.000000Z"
+        "user": {
+            "id": 3,
+            "first_name": "Mohsin",
+            "last_name": "Mazhar",
+            "email": "msnmzr1@gmail.com",
+            "created_at": "2025-03-18T20:14:22.000000Z",
+            "updated_at": "2025-03-18T20:14:22.000000Z"
+        },
+        "project": {
+            "id": 1,
+            "name": "Project A",
+            "status": "active",
+            "created_at": "2025-03-18T20:05:07.000000Z",
+            "updated_at": "2025-03-18T20:05:07.000000Z"
+        },
+        "created_at": "2025-03-18T21:00:33.000000Z",
+        "updated_at": "2025-03-18T21:00:33.000000Z"
     }
 }
 ```
@@ -292,12 +388,42 @@ Response: (200 OK)
             "id": 1,
             "name": "department",
             "type": "text",
-            "created_at": "2024-03-18T12:00:00.000000Z",
-            "updated_at": "2024-03-18T12:00:00.000000Z"
-        }
+            "created_at": "2025-03-18T20:05:07.000000Z",
+            "updated_at": "2025-03-18T20:05:07.000000Z"
+        },
     ],
-    "links": {...},
-    "meta": {...}
+    "links": {
+        "first": "http://127.0.0.1:7777/api/attributes?page=1",
+        "last": "http://127.0.0.1:7777/api/attributes?page=1",
+        "prev": null,
+        "next": null
+    },
+    "meta": {
+        "current_page": 1,
+        "from": 1,
+        "last_page": 1,
+        "links": [
+            {
+                "url": null,
+                "label": "&laquo; Previous",
+                "active": false
+            },
+            {
+                "url": "http://127.0.0.1:7777/api/attributes?page=1",
+                "label": "1",
+                "active": true
+            },
+            {
+                "url": null,
+                "label": "Next &raquo;",
+                "active": false
+            }
+        ],
+        "path": "http://127.0.0.1:7777/api/attributes",
+        "per_page": 15,
+        "to": 5,
+        "total": 5
+    }
 }
 ```
 
@@ -320,8 +446,8 @@ Response: (201 Created)
         "id": 2,
         "name": "priority",
         "type": "select",
-        "created_at": "2024-03-18T12:00:00.000000Z",
-        "updated_at": "2024-03-18T12:00:00.000000Z"
+        "created_at": "2025-03-18T21:07:48.000000Z",
+        "updated_at": "2025-03-18T21:07:48.000000Z"
     }
 }
 ```
